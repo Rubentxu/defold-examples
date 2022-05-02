@@ -1,7 +1,7 @@
 local m = require "gravityManager"
 
 function init(self)
-	self.planet = m.new()
+	self.planet = m.new(-9.8, 0, 4, self)
 end
 
 function final(self)
@@ -11,15 +11,11 @@ function final(self)
 end
 
 function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	
 end
 
 function fixed_update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	m:process()
 end
 
 function on_message(self, message_id, message, sender)
