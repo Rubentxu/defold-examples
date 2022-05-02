@@ -21,7 +21,7 @@ function init(self)
 	-- Acquire Input Focus and set initial character movement speed to zero; set its position
 	msg.post(".", "acquire_input_focus")
 	self.speed = vmath.vector3(0, 0, 0)
-	go.set_position(vmath.vector3(250, 220, 0))
+	go.set_position(vmath.vector3(-290, -195, 0))
 
 	-- Set internal control for Animations
 	self.current_animation = hash("wizardIdle")
@@ -51,21 +51,14 @@ function update(self, dt)
 
 	-- Bounce the Character x position off the Side Edges of the Game World
 	-- and keep the GameObject within a limited y range
-	if (go.get_position().x < 50) then
+	if (go.get_position().x < -442) then
 	    self.speed.x = 50
 	end
 
-	if (go.get_position().x > 950) then
+	if (go.get_position().x > 438) then
 		self.speed.x = -50
 	end
-
-	if (go.get_position().y > 300) then
-		self.speed.y = -50
-	end
-
-	if (go.get_position().y < 50) then
-		self.speed.y = 50
-	end
+	
 
 	-- Flip the sprite animation image when the x speed is negative
 	sprite.set_hflip("#wizardSprite", self.speed.x < 0)

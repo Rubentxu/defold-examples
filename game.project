@@ -3,7 +3,7 @@ title = Ejemplos
 dependencies#0 = https://github.com/rgrams/rendercam/archive/refs/tags/1.0.3.zip
 
 [bootstrap]
-main_collection = /collections/levels-manager/level4/main.collectionc
+main_collection = /collections/main.collectionc
 render = /rendercam/rendercam.renderc
 
 [input]
@@ -45,4 +45,6 @@ shared_state = 1
 [physics]
 gravity_y = -1000.0
 scale = 0.01
+max_collisions = 200
+max_contacts = 300
 

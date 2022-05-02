@@ -6,8 +6,8 @@ go.property("deleting", false)	  -- Game Object control to prevent duplicative d
 function update(self, dt)	
 	-- Determine the current triangular Game Object location and generate a message on top 
 	-- of the sprite displaying the x/y position
-	local xPos = math.floor(go.get_position().x)
-	local yPos = math.floor(go.get_position().y)
+	local xPos = math.floor(go.get_position().x+512)
+	local yPos = math.floor(go.get_position().y+384)
 
 	msg.post("@render:", "draw_text", { text = "Triangle", position = vmath.vector3(xPos-55, yPos + 75, 0) } )
 	msg.post("@render:", "draw_text", { text = "x: " .. xPos .. "  y: " .. yPos, 

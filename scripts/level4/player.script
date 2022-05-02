@@ -2,9 +2,9 @@
 local rendercam = require "rendercam.rendercam"
 
 local G = sys.get_config("physics.gravity_y", -10)
-local vScale = 4 -- amount to scale velocity setting based on mouse position
+local vScale = 14 -- amount to scale velocity setting based on mouse position
 local iterations = 40 -- number of dots to make along projection line
-local projectTime = 2.0 -- seconds into the future to project trajectory
+local projectTime = 2-- seconds into the future to project trajectory
 local step = projectTime / iterations
 
 local dotScale = vmath.vector3(0.2)
@@ -26,9 +26,8 @@ local function update_dots(self)
 end
 
 local function fire(self)
-	local ids = collectionfactory.create("#bulletfact", self.pos)
-	local body = msg.url(nil, ids[hash("/root")], "collisionobject")
-	msg.post(body, "apply_force", { force = self.initialV * (1/self.dt), position = go.get_position(ids[hash("/root")]) })
+	local id = factory.create("#bulletFactory", self.pos)	
+	msg.post(id, "apply_force", { force =  self.currentForce, position = go.get_position(body) })
 end
 
 function init(self)
@@ -36,7 +35,8 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.dots = {}
 	self.pos = go.get_position()
-	self.initialV = vmath.vector3(400, 400, 0)
+	self.initialV = vmath.vector3(math.cos(400), math.sin(400), 0)
+	self.currentForce = 0
 
 	for i=1, iterations do
 		table.insert(self.dots, spawn_dot(self))
@@ -46,8 +46,12 @@ end
 
 function update(self, dt)
 	self.dt = dt
+	msg.post("@render:", "draw_text", { text = "Current Position value: " .. tostring(self.pos), position = vmath.vector3(50, 710, 0) } )
+	msg.post("@render:", "draw_text", { text = "InitialV value: " .. tostring(self.initialV), position = vmath.vector3(50, 690, 0) } )
+	msg.post("@render:", "draw_text", { text = "Appy Current Force value: " .. tostring(self.currentForce), position = vmath.vector3(50, 670, 0) } )
+	
 	if self.click_pressed then
-		msg.post("@render:", "draw_line", { start_point = self.pos, end_point = self.mouse_wpos, color = lineColor })
+		msg.post("@render:", "draw_line", { start_point = self.mouse_wpos, end_point = self.pos, color = lineColor })
 	end
 end
 
@@ -55,7 +59,7 @@ function on_input(self, action_id, action)
 	if not action_id then
 		self.mouse_wpos = rendercam.screen_to_world_2d(action.screen_x, action.screen_y)
 		if self.click_pressed then
-			self.initialV = (self.mouse_wpos - self.pos) * vScale
+			self.initialV = (self.pos - self.mouse_wpos) * vScale
 			update_dots(self)
 		end
 	end
@@ -63,9 +67,10 @@ function on_input(self, action_id, action)
 		if action.pressed then
 			self.click_pressed = true
 			self.mouse_wpos = rendercam.screen_to_world_2d(action.screen_x, action.screen_y)
-			self.initialV = (self.mouse_wpos - self.pos) * vScale
+			self.initialV = (self.pos - self.mouse_wpos) * vScale
 			update_dots(self)
 		elseif action.released then
+			self.currentForce = self.initialV * (1/self.dt)
 			self.click_pressed = false
 		end
 	elseif action_id == hash("right click") and action.pressed then

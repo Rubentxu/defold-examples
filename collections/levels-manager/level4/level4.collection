@@ -19,12 +19,12 @@ instances {
     z: 1.0
   }
 }
-collection_instances {
+instances {
   id: "player"
-  collection: "/collections/levels-manager/level4/player/player.collection"
+  prototype: "/collections/levels-manager/level4/player/player.go"
   position {
-    x: -280.0
-    y: -110.0
+    x: 0.0
+    y: 0.0
     z: 0.0
   }
   rotation {
@@ -51,8 +51,8 @@ embedded_instances {
   "mass: 0.0\\n"
   "friction: 0.1\\n"
   "restitution: 0.5\\n"
-  "group: \\\"default\\\"\\n"
-  "mask: \\\"default\\\"\\n"
+  "group: \\\"wall\\\"\\n"
+  "mask: \\\"bullet\\\"\\n"
   "embedded_collision_shape {\\n"
   "  shapes {\\n"
   "    shape_type: TYPE_BOX\\n"
@@ -114,7 +114,7 @@ embedded_instances {
   data: "embedded_components {\n"
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"tile_set: \\\"/collections/levels-manager/level4/common.atlas\\\"\\n"
+  "  data: \"tile_set: \\\"/collections/levels-manager/level4/level4.atlas\\\"\\n"
   "default_animation: \\\"TEX_Square_64\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "blend_mode: BLEND_MODE_ALPHA\\n"
@@ -160,8 +160,8 @@ embedded_instances {
   "mass: 0.0\\n"
   "friction: 0.1\\n"
   "restitution: 0.5\\n"
-  "group: \\\"default\\\"\\n"
-  "mask: \\\"default\\\"\\n"
+  "group: \\\"wall\\\"\\n"
+  "mask: \\\"bullet\\\"\\n"
   "embedded_collision_shape {\\n"
   "  shapes {\\n"
   "    shape_type: TYPE_BOX\\n"
@@ -223,7 +223,7 @@ embedded_instances {
   data: "embedded_components {\n"
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"tile_set: \\\"/collections/levels-manager/level4/common.atlas\\\"\\n"
+  "  data: \"tile_set: \\\"/collections/levels-manager/level4/level4.atlas\\\"\\n"
   "default_animation: \\\"TEX_Square_64\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "blend_mode: BLEND_MODE_ALPHA\\n"
@@ -269,8 +269,8 @@ embedded_instances {
   "mass: 0.0\\n"
   "friction: 0.1\\n"
   "restitution: 0.5\\n"
-  "group: \\\"default\\\"\\n"
-  "mask: \\\"default\\\"\\n"
+  "group: \\\"wall\\\"\\n"
+  "mask: \\\"bullet\\\"\\n"
   "embedded_collision_shape {\\n"
   "  shapes {\\n"
   "    shape_type: TYPE_BOX\\n"
@@ -332,7 +332,7 @@ embedded_instances {
   data: "embedded_components {\n"
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"tile_set: \\\"/collections/levels-manager/level4/common.atlas\\\"\\n"
+  "  data: \"tile_set: \\\"/collections/levels-manager/level4/level4.atlas\\\"\\n"
   "default_animation: \\\"TEX_Square_64\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "blend_mode: BLEND_MODE_ALPHA\\n"
@@ -364,6 +364,62 @@ embedded_instances {
   scale3 {
     x: 16.0
     y: 0.5
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "controls"
+  children: "gui"
+  data: ""
+  position {
+    x: -503.0
+    y: -296.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "gui"
+  data: "components {\n"
+  "  id: \"gui\"\n"
+  "  component: \"/collections/levels-manager/level2/level2Controls.gui\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
     z: 1.0
   }
 }

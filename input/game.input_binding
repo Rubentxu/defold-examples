@@ -3,10 +3,6 @@ key_trigger {
   action: "escape"
 }
 mouse_trigger {
-  input: MOUSE_BUTTON_1
-  action: "touch"
-}
-mouse_trigger {
   input: MOUSE_BUTTON_LEFT
   action: "left click"
 }

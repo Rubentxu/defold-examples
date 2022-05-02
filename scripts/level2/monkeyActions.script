@@ -8,7 +8,7 @@
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.speed = vmath.vector3(0, 0, 0)
-	go.set_position(vmath.vector3(512, 250, 0))
+	go.set_position(vmath.vector3(-38, -18, 0))
 end
 
 function final(self)
@@ -22,9 +22,10 @@ function update(self, dt)
 end
 
 function on_input(self, action_id, action)
-	if action_id == hash("touch") and action.released then
+	if action_id == hash("left click") and action.released then
 		go.cancel_animations(".", "position")
-		go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(action.screen_x, action.screen_y, 0), 
+		
+		go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(action.screen_x-512, action.screen_y-384, 0), 
 			go.EASING_OUTCUBIC, 1, 0, function(self, url, property) end)
 		return true
 	end
