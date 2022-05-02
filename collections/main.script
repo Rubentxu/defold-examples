@@ -17,7 +17,7 @@ function on_message(self, message_id, message, sender)
 		if self.state ~= "MAIN_MENU" then
 			-- Upon receipt of a 'to_main_menu' message -- ensure that the 
 			-- Level1 and Level2 collections are unloaded		
-			for i = 1,4 do
+			for i = 1,5 do
 				if self.state == "LEVEL"..i.."_RUNNING" then
 					print("Level "..i.." Unload")
 					msg.post("#level"..i.."_proxy", "unload")

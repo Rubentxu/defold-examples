@@ -1,0 +1,37 @@
+local M = {}
+
+function M:add_satellite(go)
+	table.insert(self.satellites, go)
+end
+
+function M:get_bodies_list()
+	return self.satellites
+end
+
+function M:process()
+	local planet_position = self.planet.get_position()
+	for index,satellite in pairs(self.satellites) do
+		local planet_distance = vmath.vector3() + satellite.get_position() - planet_position
+		local satellite_mass = go.get(satellite.get_id(), "mass")
+		local planet_distance_length = vmath.length(planet_distance)
+		
+		local force = self.gravity *  satellite_mass / planet_distance_length
+		
+		if planet_distance_length < self.radius * self.gravityFactor then			
+			msg.post(satellite.get_id(), "apply_force", { force =  planet_distance * force, position = go.get_position(id) })
+		end
+	end
+end
+
+function M.new(_gravity, _radius, _gravityFactor, _go)
+	local state = {
+		gravity = _gravity,
+		radius = _radius,
+		gravityFactor = _gravityFactor,
+		planet = _go,
+		satellites = {}
+	}
+	return setmetatable(state, { __index = M })
+end
+
+return M
